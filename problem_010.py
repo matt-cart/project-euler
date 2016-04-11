@@ -1,18 +1,26 @@
 """
 Project Euler - Problem 10
 
-OPEN
+SOLVE
 """
 import utils
 
+def primesSieve(prime_dict):
+    limit = len(prime_dict) 
+    for (i, isprime) in enumerate(prime_dict):
+        if isprime:
+            for n in xrange(i*i, limit, i):
+                prime_dict[n] = False
+    return prime_dict
+
 if __name__ == "__main__":
-    top_num = 10
-    nums = reversed(range(2, top_num+1))
-    primes = []
-    for num in nums:
-        if num % 2 != 0:
-            if num % 3 != 0:
-                if num % 5 != 0:
-                    if utils.isPrime(num):
-                        print num
-                        primes.append(num)
+    top_num = 2000000
+    prime_dict = [True] * top_num
+    prime_dict[0] = prime_dict[1] = False
+    prime_dict = primesSieve(prime_dict)
+    running_sum = 0
+    for i,isprime in enumerate(prime_dict):
+        if isprime:
+            running_sum += i
+    print prime_dict
+    print running_sum

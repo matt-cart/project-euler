@@ -1,3 +1,5 @@
+import math
+
 def isPrime(a):
     return all(a % i for i in xrange(2, a))
 
@@ -8,6 +10,11 @@ def findPrimes(a, b):
         if isPrime(i):
             primes.append(i)
     return primes
+
+
+def findFactors(n):
+    return set(reduce(list.__add__, 
+                ([i, n//i] for i in range(1, int(math.sqrt(n)) + 1) if n % i == 0)))
 
 
 def findPrimeFactors(n):
